@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_dicas" value="name:num;datatype:int,name:titulo;datatype:string,name:titulo_descricao;datatype:string" />
+</info>

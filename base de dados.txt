@@ -1,0 +1,189 @@
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
+-- http://www.phpmyadmin.net
+--
+-- M�quina: localhost
+-- Data de Cria��o: 06-Jul-2011 �s 13:38
+-- Vers�o do servidor: 5.1.36
+-- vers�o do PHP: 5.3.0
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Base de Dados: `estimadiaria`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `cliente`
+--
+
+CREATE TABLE IF NOT EXISTS `cliente` (
+  `NIF` int(11) NOT NULL,
+  `nome` varchar(200) DEFAULT NULL,
+  `morada` varchar(100) DEFAULT NULL,
+  `localidade` varchar(80) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `contacto` int(11) DEFAULT NULL,
+  `utilizador` varchar(80) DEFAULT NULL,
+  `senha` varchar(10) DEFAULT NULL,
+  `activacao` tinyint(1) NOT NULL,
+  PRIMARY KEY (`NIF`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `cliente`
+--
+
+INSERT INTO `cliente` (`NIF`, `nome`, `morada`, `localidade`, `email`, `contacto`, `utilizador`, `senha`, `activacao`) VALUES
+(876453892, 'joaquina', NULL, NULL, 'joaquinamaria@hotmail.com', NULL, 'joaquina', 'joaquina', 0),
+(123456789, 'ana', 'av. fernao magalhaes', 'porto', 'anasofiagermano@msn.com', 919999999, 'ana', 'ana', 1),
+(508000009, 'Vitor Silva', 'Av. Fernao de magalhães n 1123 1 esq', 'Porto', 'estimadiaria@hotmail.com', 911110000, 'administrador', '1234', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `descricao`
+--
+
+CREATE TABLE IF NOT EXISTS `descricao` (
+  `cod_descricao` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_servico` varchar(50) DEFAULT NULL,
+  `descricao` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`cod_descricao`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `descricao`
+--
+
+INSERT INTO `descricao` (`cod_descricao`, `tipo_servico`, `descricao`) VALUES
+(1, 'Uma geral', 'Limpar tudo a fundo '),
+(2, 'Lavagem de vidros', 'Lavagem de vidros com plus e reclate');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `dicas_limpeza`
+--
+
+CREATE TABLE IF NOT EXISTS `dicas_limpeza` (
+  `num` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(100) DEFAULT NULL,
+  `titulo_descricao` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`num`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=46 ;
+
+--
+-- Extraindo dados da tabela `dicas_limpeza`
+--
+
+INSERT INTO `dicas_limpeza` (`num`, `titulo`, `titulo_descricao`) VALUES
+(1, 'Problemas com formigas', 'Coloque casca de pepino junto a saida das formigas.'),
+(28, 'Tirar tinta das roupas', 'Para tirar tinta das roupas, ponha uma camada (generosa) de pasta de dentes, deixe secar completamente e depois lave.'),
+(31, 'Tirar etiquetas de caixas de papelao', 'As etiquetas coladas sobre caixas de papelão devem ser aquecidas rapidamente com um secador de cabelo. Assim, elas soltam-se sem problemas e a caixa não fica danificada.'),
+(29, 'Branquear roupa branca', 'Para branquear roupa branca, ponha-a em água quente com uma rodela de limão durante dez minutos.'),
+(32, 'Para tirar manchas de vinho tinto das roupas', ' Coloque de imediato sobre elas, farinha de mandioca ou polvilho, até que fiquem embebidas. Depois, lave-as com água e sabão. '),
+(33, 'Para tirar o mofo de armarios', 'Coloque um saleiro com bicarbonato de sódio ou cal virgem na gaveta onde há mofo.'),
+(34, 'Para tirar pastilha elastica da roupa ', 'Ponha a roupa no congelador durante uma hora e retire-a quando estiver dura.  '),
+(35, 'Limpar tapete', 'Nao precisamos de limpar o tapete sujo com produtos quÃ­micos. Em vez disso, podemos distribuir batatas cruas raladas sobre o tapete, deixar secar e depois aspirar.    '),
+(36, 'Pias de aco', 'Para as pias de aço inoxidavel, tire as manchas passando um pano com alcool.    '),
+(37, 'Espelhos a brilhar', 'Para por os espelhos a brilhar limpe com alcool.'),
+(38, 'Limpeza de paredes', 'Passe periodicamente o pano seco para tirar o pó. Em tintas laváveis, passe uma esponja molhada em água morna com uma ou duas colheres de bicarbonato em cada litro de agua e esfregue de leve.     '),
+(39, 'Limpeza de materiais de aco inox (cubas, coifas, eletrodomesticos)', 'Recomenda-se utilizar apenas agua e sabao neutro para retirar gorduras e nunca utilizar materiais abrasivos como bombril, sapoleo.     '),
+(40, 'Limpeza de marmores', 'O ideal e limpar logo que se suja, especialmente se for uma mancha. Use somente agua e detergente neutro. Evite o uso de detergentes corrosivos, sapoleos e similares que podem danificar o polimento, remover o silicone ou o betume e provocar abertura de poros e pequenos buracos nas superfi­cies.');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `pedido_descricao`
+--
+
+CREATE TABLE IF NOT EXISTS `pedido_descricao` (
+  `n_pedido` int(11) NOT NULL AUTO_INCREMENT,
+  `cod_descricao` varchar(50) NOT NULL,
+  PRIMARY KEY (`n_pedido`,`cod_descricao`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `pedido_descricao`
+--
+
+INSERT INTO `pedido_descricao` (`n_pedido`, `cod_descricao`) VALUES
+(1, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `pedido_orcamento`
+--
+
+CREATE TABLE IF NOT EXISTS `pedido_orcamento` (
+  `n_pedido` int(11) NOT NULL AUTO_INCREMENT,
+  `NIF` int(11) DEFAULT NULL,
+  `tipo_servico` varchar(50) DEFAULT NULL,
+  `data_pedido` date DEFAULT NULL,
+  PRIMARY KEY (`n_pedido`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `pedido_orcamento`
+--
+
+INSERT INTO `pedido_orcamento` (`n_pedido`, `NIF`, `tipo_servico`, `data_pedido`) VALUES
+(1, 123456789, 'Uma geral', '2011-07-03');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `servico`
+--
+
+CREATE TABLE IF NOT EXISTS `servico` (
+  `n_pedido` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_servico` varchar(50) DEFAULT NULL,
+  `caracter_servico` varchar(50) DEFAULT NULL,
+  `tipo_infra_estrutura` varchar(100) DEFAULT NULL,
+  `observacoes` varchar(200) DEFAULT NULL,
+  `produtos` varchar(10) DEFAULT NULL,
+  `sugestao_horario` date DEFAULT NULL,
+  PRIMARY KEY (`n_pedido`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+--
+-- Extraindo dados da tabela `servico`
+--
+
+INSERT INTO `servico` (`n_pedido`, `tipo_servico`, `caracter_servico`, `tipo_infra_estrutura`, `observacoes`, `produtos`, `sugestao_horario`) VALUES
+(1, 'Uma geral', 'Ocasional', 'Loja', NULL, 'sim', '2011-07-30'),
+(2, 'Lavagem de vidros', 'Periodico', 'Condominio', NULL, 'sim', '2011-07-25'),
+(3, 'Lavagem de fachadas', 'ocasional', 'Armazem', NULL, 'sim', '2011-08-10'),
+(4, 'Lavagem de muros', 'Periodico', 'Fabrica', NULL, 'nao', '2011-09-14'),
+(5, 'Lavagem de campos de jogos', 'Ocasional', 'Outros', NULL, 'sim', '2011-07-18'),
+(6, 'Tratamento de pedras', 'Ocasional', 'Casas particulares', NULL, 'sim', '2011-07-27'),
+(7, 'Outros', 'Periodico', 'Escritorios', NULL, 'sim', '2011-07-21'),
+(8, 'Lavagem de garagens', 'Periodico', 'Condominio', NULL, 'sim', '2011-07-14'),
+(9, 'Uma geral', 'Ocasional', 'Restaura��o', NULL, 'nao', '2011-07-26');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `site`
+--
+
+CREATE TABLE IF NOT EXISTS `site` (
+  `numero` int(11) NOT NULL AUTO_INCREMENT,
+  `a_empresa` varchar(10000) NOT NULL,
+  `servicos` varchar(10000) NOT NULL,
+  `recursos_humanos` varchar(10000) NOT NULL,
+  `contactos` varchar(1000) NOT NULL,
+  PRIMARY KEY (`numero`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `site`
+--
+
+INSERT INTO `site` (`numero`, `a_empresa`, `servicos`, `recursos_humanos`, `contactos`) VALUES
+(1, '<p style="text-align: justify;">Fundada em 2009, a Estima Di&aacute;ria foi idealizada por profissionais inseridos no ramo das limpezas h&aacute; cerca de 10 anos, mas que decidiram revolucionar as limpezas em geral.</p>\r\n<p style="text-align: justify;">Com o esp&iacute;rito inovador e empreendedor, decidiram investir e inicializar um projecto s&oacute;lido e promissor. Contou desde logo com um variad&iacute;ssimo leque de clientes prestigiados n&atilde;o apenas nacionalmente, mas internacionalmente. Devido &agrave; excelente qualidade dos servi&ccedil;os prestados, conseguiu assim a fideliza&ccedil;&atilde;o de v&aacute;rios clientes.</p>\r\n<p style="text-align: justify;">A Estima Di&aacute;ria tem uma pol&iacute;tica de gest&atilde;o bastante diferente das actuais e, por esse motivo, tem conseguido ao longo do tempo empregar colaboradores empenhados e motivados, isto tudo para poder oferecer aos clientes a satisfa&ccedil;&atilde;o de ter escolhido a nossa empresa para os seus servi&ccedil;os.</p>\r\n<p style="text-align: justify;">Analisado o mercado, r&aacute;pido nos apercebemos que os colaboradores dos nossos clientes estariam interessados nos nossos servi&ccedil;os e assim foi criada mais uma equipa, esta mais vocacionada para as limpezas dom&eacute;sticas profissionais, que obteve logo bons resultados.</p>', '<p class="style1" style="text-align: justify;">A <strong>Estima Di&aacute;ria</strong> desenvolve principalmente a sua actividade nos Servi&ccedil;os de Limpeza Profissionais, construindo uma imagem e uma marca &uacute;nica de limpeza e profissionalismo. Praticamos os nossos servi&ccedil;os em instala&ccedil;&otilde;es industriais, comerciais, &hellip;, n&atilde;o esquecendo tamb&eacute;m as limpezas dom&eacute;sticas profissionais, podendo aliar as limpezas profissionais tamb&eacute;m no lar.</p>\r\n<p class="style1" style="text-align: justify;">No leque das limpezas industriais est&atilde;o inseridos:</p>\r\n<ul style="text-align: justify;">\r\n<li>F&aacute;bricas;</li>\r\n<li>Escrit&oacute;rios;</li>\r\n<li>Lojas;</li>\r\n<li>Armaz&eacute;ns;</li>\r\n<li>Grandes superf&iacute;cies comerciais;</li>\r\n</ul>\r\n<p class="style1" style="text-align: justify;">Nas limpezas industriais &eacute; utilizada a interven&ccedil;&atilde;o manual e/ou mec&acirc;nica.<br /> Nas limpezas dom&eacute;sticas normalmente &eacute; colocado todo o nosso profissionalismo e brio. Caracteriza-se pela interven&ccedil;&atilde;o em espa&ccedil;os residenciais mobilados e habitados (apartamentos e moradias).</p>\r\n<p class="style1" style="text-align: justify;">Normalmente todos os nossos servi&ccedil;os se dividem, basicamente, em tr&ecirc;s tipos:</p>\r\n<ul style="text-align: justify;">\r\n<li>Servi&ccedil;os t&eacute;cnicos: normalmente passa por trabalhos iniciais de pisos ou outro tipo de superf&iacute;cies, podendo tamb&eacute;m passar pela recupera&ccedil;&atilde;o, nos casos em que j&aacute; existiu uma interven&ccedil;&atilde;o, que pode variar em fun&ccedil;&atilde;o dos materiais a considerar &ndash; granitos, m&aacute;rmores, vinil, alcatifa, madeira, etc &ndash; tendo em conta n&atilde;o s&oacute; um aspecto mais agrad&aacute;vel, mas tamb&eacute;m e principalmente a facilidade da manuten&ccedil;&atilde;o di&aacute;ria.</li>\r\n<li>Servi&ccedil;os ocasionais: passa por uma interven&ccedil;&atilde;o &uacute;nica ou pouco frequente, habitualmente, chamadas, de limpezas gerais em fim de obra.</li>\r\n<li>Servi&ccedil;o de manuten&ccedil;&atilde;o: este tipo de servi&ccedil;o normalmente passa por uma presta&ccedil;&atilde;o de servi&ccedil;os, com uma frequ&ecirc;ncia vari&aacute;vel que pode ser di&aacute;ria, semanal, quinzenal, etc.</li>\r\n</ul>\r\n<p class="style1" style="text-align: justify;">Servi&ccedil;os de limpeza mais relevantes:</p>\r\n<ul style="text-align: justify;">\r\n<li>Manuten&ccedil;&otilde;es di&aacute;rias;</li>\r\n<li>Polimento mec&acirc;nico de m&aacute;rmores;</li>\r\n<li>Lavagem de alcatifas;</li>\r\n<li>Inunda&ccedil;&otilde;es;</li>\r\n<li>Vitrifica&ccedil;&atilde;o de pavimentos;</li>\r\n<li>Limpezas gerais;</li>\r\n<li>Limpeza de vidros;</li>\r\n</ul>\r\n<p class="style1" style="text-align: justify;">Estas s&atilde;o alguns dos principais servi&ccedil;os que executamos e alguns dos que estamos 100% especializados para executar com um brio e profissionalismo fenomenal e inigual&aacute;vel.</p>', '<p style="text-align: justify;">A Estima Di&aacute;ria tem, como uma das prioridades, a responsabilidade social em rela&ccedil;&atilde;o a todos os colaboradores.</p>\r\n<p style="text-align: justify;">Esta atitude implica respeito, compreens&atilde;o e dinamismo de todos, desta forma cri&aacute;mos um ambiente de desenvolvimento pessoal e global.</p>\r\n<p style="text-align: justify;">Venha fazer parte da nossa equipa.</p>', '<table style="width: 272px; height: 106px;" border="0">\r\n<tbody>\r\n<tr>\r\n<td align="right" width="61"><strong>Morada:</strong></td>\r\n<td width="201" height="14">Av. Fern&atilde;o Magalh&atilde;es 1123 1&ordm; esq</td>\r\n</tr>\r\n<tr>\r\n<td align="right" width="61">&nbsp;</td>\r\n<td>4350-169 Porto</td>\r\n</tr>\r\n<tr>\r\n<td align="right"><strong>Fax:</strong></td>\r\n<td>224 023 009</td>\r\n</tr>\r\n<tr>\r\n<td align="right"><strong>Telefone:</strong></td>\r\n<td>225 180 543</td>\r\n</tr>\r\n<tr>\r\n<td align="right"><strong>Telem&oacute;vel:</strong></td>\r\n<td>911 118 253 / 961 258 140</td>\r\n</tr>\r\n<tr>\r\n<td align="right"><strong>Email:</strong></td>\r\n<td>estimadiaria@hotmail.com</td>\r\n</tr>\r\n</tbody>\r\n</table>');
